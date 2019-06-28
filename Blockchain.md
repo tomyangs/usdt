@@ -210,7 +210,7 @@
       }, ...
     }
     
-###getmempooldescendants txid (verbose)
+### getmempooldescendants txid (verbose)
 
     If txid is in the mempool, returns all in-mempool descendants.
     如果txid在mempool中，则返回所有in-mempool后代。
