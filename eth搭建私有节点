@@ -1,0 +1,107 @@
+## 1、创建一个地址
+    D:\geth\geth --datadir "E:\walletservice\geth\geth" account new
+## 2、初始化创世区块
+    名字：genesis.json
+    {
+    "config": {
+            "chainId": 1,
+            "homesteadBlock": 0,
+            "eip155Block": 0,
+            "eip158Block": 0
+        },
+      "alloc"      : {
+        "xxxxxx": {"balance": "1000000010000000000"}
+        },
+      "coinbase"   : "0x0000000000000000000000000000000000000000",
+      "difficulty" : "0x20000",
+      "extraData"  : "",
+      "gasLimit"   : "0x4c4b40",
+      "nonce"      : "0x0001000000000042",
+      "mixhash"    : "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp"  : "0x00"
+    }
+### 参数的配置：
+#### mixhash
+    A 256-bit hash which proves, combined with the nonce, that a sufficient amount of computation has been carried out on this block: the Proof-of-Work (PoW). The combination of nonce and mixhash must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44). It allows to verify that the Block has really been cryptographically mined, thus, from this aspect, is valid.
+
+    一个256位的哈希证明，与nonce相结合，已经对该块进行了足够的计算：工作量证明（PoW）。 nonce和mixhash的组合必须满足黄皮书4.3.4中描述的数学条件。块头有效性，（44）。它允许验证块确实已经加密地挖掘，因此，从这方面来说，它是有效的。
+
+#### nonce
+    A 64-bit hash, which proves, combined with the mix-hash, that a sufficient amount of computation has been carried out on this block: the Proof-of-Work (PoW). The combination of nonce and mixhash must satisfy a mathematical condition described in the Yellowpaper, 4.3.4. Block Header Validity, (44), and allows to verify that the Block has really been cryptographically mined and thus, from this aspect, is valid. The nonce is the cryptographically secure mining proof-of-work that proves beyond reasonable doubt that a particular amount of computation has been expended in the determination of this token value. (Yellowpager, 11.5. Mining Proof-of-Work).
+
+    证明64位散列与混合散列相结合，在该块上进行了足够的计算：工作量证明（PoW）。 nonce和mixhash的组合必须满足黄皮书4.3.4中描述的数学条件。块头有效性，（44），并允许验证块确实已经加密地挖掘，因此，从这方面来说，是有效的。 nonce是加密安全的挖掘工作证明，证明在确定该令牌值时已经花费了特定量的计算。 （Yellowpager，11.5。采矿工作证明）。
+
+#### difficulty
+    A scalar value corresponding to the difficulty level applied during the nonce discovering of this block. It defines the mining Target, which can be calculated from the previous block’s difficulty level and the timestamp. The higher the difficulty, the statistically more calculations a Miner must perform to discover a valid block. This value is used to control the Block generation time of a Blockchain, keeping the Block generation frequency within a target range. On the test network, we keep this value low to avoid waiting during tests, since the discovery of a valid Block is required to execute a transaction on the Blockchain.
+
+    标量值，对应于在该块的随机数发现期间应用的难度级别。它定义了挖掘目标，可以根据前一个块的难度级别和时间戳来计算。难度越高，Miner必须执行的统计更多计算才能发现有效块。此值用于控制区块链的块生成时间，将块生成频率保持在目标范围内。在测试网络上，我们将此值保持为低以避免在测试期间等待，因为在区块链上执行事务需要发现有效的块。
+
+#### alloc
+    Allows defining a list of pre-filled wallets. That’s an Ethereum specific functionality to handle the “Ether pre-sale” period.
+
+    允许定义预先填充的钱包列表。这是以太坊特定功能，可以处理“以太网预售”时期。
+
+#### coinbase
+    The 160-bit address to which all rewards (in Ether) collected from the successful mining of this block have been transferred. They are a sum of the mining reward itself and the Contract transaction execution refunds. Often named “beneficiary” in the specifications, sometimes “etherbase” in the online documentation. This can be anything in the Genesis Block since the value is set by the setting of the Miner when a new Block is created.
+
+    从该块的成功挖掘中收集的所有奖励（以太币）的160位地址已被转移。它们是采矿奖励本身和合同交易执行退款的总和。通常在规范中命名为“受益人”，有时在在线文档中称为“etherbase”。这可以是Genesis Block中的任何内容，因为在创建新Block时，Miner的设置会设置该值。
+
+#### timestamp
+    A scalar value equal to the reasonable output of Unix time() function at this block inception. This mechanism enforces a homeostasis in terms of the time between blocks. A smaller period between the last two blocks results in an increase in the difficulty level and thus additional computation required to find the next valid block. If the period is too large, the difficulty, and expected time to the next block, is reduced. The timestamp also allows verifying the order of block within the chain (Yellowpaper, 4.3.4. (43)).
+
+    标量值等于此块开始时Unix time（）函数的合理输出。该机制在块之间的时间方面强制实施稳态。最后两个块之间的较小周期导致难度级别的增加，从而导致找到下一个有效块所需的额外计算。如果周期太大，则减少了难度和到下一个块的预期时间。时间戳还允许验证链内的块顺序（黄皮书，4.3.4。（43））。
+
+#### parentHash
+    The Keccak 256-bit hash of the entire parent block header (including its nonce and mixhash). Pointer to the parent block, thus effectively building the chain of blocks. In the case of the Genesis block, and only in this case, it’s 0.
+
+    整个父块头的Keccak 256位哈希（包括其nonce和mixhash）。指向父块的指针，从而有效地构建块链。在Genesis块的情况下，仅在这种情况下，它为0。
+
+#### extraData
+    An optional free, but max. 32-byte long space to conserve smart things for ethernity. :)
+
+    可选免费，但最多32字节长的空间，以保护智能的东西为ethernity。 :)
+
+#### gasLimit
+    A scalar value equal to the current chain-wide limit of Gas expenditure per block. High in our case to avoid being limited by this threshold during tests. Note: this does not indicate that we should not pay attention to the Gas consumption of our Contracts.
+
+    标量值等于每块汽油支出的当前链范围限制。我们的情况需要设置得很高，以避免在测试期间受到此阈值的限制。注意：这并不表示我们不应该关注合同的汽油消耗量。
+---
+#### 参数出自于 
+    https://www.codercto.com/a/30028.html  
+---
+### 遇到常见的错误：
+    Fatal: invalid genesis file: missing 0x prefix for hex data：这个错误信息意思很明白，就是你的json文件中，对于16进制数据，需要加上0x前缀
+
+    Fatal: invalid genesis file: hex string has odd length: 从v1.6开始，设置的十六进制数值，不能是奇数位， 比如不能是0x0，而应该是0x00。
+    
+    Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.5版本，而是需要加上config部分。
+    
+    Error: invalid sender undefined: 这个错误不会导致初始化失败，但是会在以后的转账（eth.sendTransaction），或者部署智能合约的时候产生。解决方法就是chainId 不能设置为0。 如果你完全按照github上给的官方配置文件，就会产生这个错误。
+### 参数的配置：
+    https://www.codercto.com/a/30028.html
+
+### 以太网常用命令：
+    https://www.jianshu.com/p/e1292dcc72c1
+## 初始化
+    D:\geth\geth --datadir "D:/geth" init "./genesis.json"
+## 启动节点1
+    D:\geth\geth --datadir "D:/geth" --rpcaddr localhost --rpcport 8545 --port 30303 --rpc --rpccorsdomain "*" --networkid 10 --rpcapi "admin,debug,eth,ethash,miner,net,personal,rpc,txpool,web3" --ipcdisable
+## 启动节点2
+    D:\geth2\geth --datadir "D:/geth2" --rpcaddr localhost --rpcport 8546 --port 30304 --rpc --rpccorsdomain "*" --networkid 10 --ipcdisable --bootnodes "enode://369741a7c241af081c4f68d9d0b061fab703b13066a741e142b15119c047d2535752a15098f6c5ebc21e63205ea368c434f953d216472f10566e3d351f2bddc7@127.0.0.1:30303"
+## 进入控制台
+    D:\geth\geth attach //./pipe/geth.ipc
+    "0x7f5821e91819ba63c3b9a90644f669a7a5b7eca0"
+## 命令
+    //开始挖矿
+    miner.start()
+    建议用miner.start(1):启动一个线程，避免电脑卡死
+    //停止挖矿
+    miner.stop()
+    personal.unlockAccount("0x05095980f6e393c1e3caf948c1493807928cf06d")
+    //创建新账户
+    perosonal.newAccount("password")
+    //查看当前链有多少账户，返回是一个数组
+    eth.accounts[x]
+    //切换挖矿存入的账户
+    miner.setEtherbase(eth.accounts[x])
