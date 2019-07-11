@@ -1,0 +1,11 @@
+## MetaMask下载及配置
+    http://bjiebtc.com/qianbao-metamask-shiyongjc/
+## MetaMask对ETH进行配置
+### 新建网络
+    点击网络----》自定义RPC-----》1、Network Name：自定义一个名字
+                                  2、New RPC URL: http://localhost:8545
+                                  3、ChainID(optional):10(按照genesis.json中的chainId值)
+                                  4、Symbol(optional):eth
+                                  Block Explorer URL(optional):http://localhost:8545
+### 新建账户
+    点击导入账户-----》选择类型为JSON 文件------》在本地选择在本地eth私链创建的账户（在datadir下的keystore/UTC--xxxxx--xxxxx）----》导入
